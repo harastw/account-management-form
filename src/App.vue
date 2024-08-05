@@ -1,27 +1,51 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div id="firstLine">
+    <span>Учётные записи &nbsp;&nbsp;</span>
+    <AddUserButton @add-user="addUser" /><br>
+  </div>
+  <Attention />
+  <UserList ref="userList" />
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import HelloWorld from './components/HelloWorld.vue';
+import Attention from './components/Attention.vue';
+import UserList from './components/UserList.vue';
+import AddUserButton from './components/AddUserButton.vue';
 
 @Options({
   components: {
-    HelloWorld,
+    Attention,
+    UserList,
+    AddUserButton
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  addUser() {
+    // Получаем доступ к методу дочернего компонента UserList
+    (this.$refs.userList as any).addUser();
+  }
+}
 </script>
 
-<style>
+<style lang="scss">
+#firstLine {
+  margin-bottom: 20px;
+}
+
 #app {
+  max-width: 70%;
+  max-width: 1000px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  // color: #2c3e50;
   margin-top: 60px;
+  margin-left: 60px;
 }
+
+#headlines {
+ 
+}
+
 </style>
