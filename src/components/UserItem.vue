@@ -1,7 +1,6 @@
 <template>
   <li class="user-item">
     <div class="form-group">
-      <label>Метки</label>
       <input 
         v-model="localUser.tag" 
         @input="updateUser('tag', localUser.tag)" 
@@ -10,7 +9,6 @@
     </div>
 
     <div class="form-group">
-      <label>Тип записи</label>
       <n-select
         v-model:value="localUser.type"
         @update:value="updateUser('type', $event)"
@@ -20,7 +18,6 @@
     </div>
 
     <div class="form-group">
-      <label>Логин</label>
       <input 
         v-model="localUser.login" 
         @input="updateUser('login', localUser.login)" 
@@ -29,7 +26,6 @@
     </div>
 
     <div class="form-group" v-if="localUser.type === 'Локальная'">
-      <label>Пароль</label>
       <n-input
         type="password"
         v-model:value="localUser.password"
@@ -48,7 +44,7 @@ import { NInput, NSelect } from 'naive-ui';
 
 interface User {
   tag: string;
-  type: 'LDAP' | 'Локальная'; // This field should always have a valid value
+  type: 'LDAP' | 'Локальная';
   login: string;
   password: string | null;
 }
@@ -79,34 +75,23 @@ export default defineComponent({
   },
   data() {
     return {
-      localUser: { ...this.user }, // Create a local copy for mutation
+      localUser: { ...this.user },
     };
   },
   methods: {
     updateUser(field: keyof User, value: string | null) {
-      // Restrict updates based on field
-      if (field === 'type' && (value !== 'LDAP' && value !== 'Локальная')) {
-        // Invalid type value, do not proceed
-        return;
-      }
-
-      if (field === 'type' && value === null) {
-        // Optionally handle null case for type, if necessary
-        return;
-      }
-
-      // Assign only if the value is valid for the corresponding field
-      this.localUser[field] = value as any; // Type assertion to bypass TS check
-      this.onUpdate(field, value); // Notify parent about change
+      // Упрощаем, просто присваиваем значение полю
+      this.localUser[field] = value as any;
+      this.onUpdate(field, value);
     },
     removeUser() {
-      this.onRemove(); // Notify parent to remove user
+      this.onRemove();
     },
   },
   watch: {
     user: {
       handler(newUser) {
-        this.localUser = { ...newUser }; // Sync local state with prop
+        this.localUser = { ...newUser };
       },
       deep: true,
     },
