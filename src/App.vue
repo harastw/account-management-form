@@ -4,7 +4,7 @@
     <AddUserButton @add-user="addUser" /><br>
   </div>
   <Attention />
-  <UserList ref="userList" />
+  <UserList @add-user="addUser" ref="userList" />
 </template>
 
 <script lang="ts">
@@ -12,18 +12,20 @@ import { Options, Vue } from 'vue-class-component';
 import Attention from './components/Attention.vue';
 import UserList from './components/UserList.vue';
 import AddUserButton from './components/AddUserButton.vue';
+import { useUserStore } from './store';
 
 @Options({
   components: {
     Attention,
     UserList,
-    AddUserButton
+    AddUserButton,
   },
 })
 export default class App extends Vue {
-  addUser() {
-    // Получаем доступ к методу дочернего компонента UserList
-    (this.$refs.userList as any).addUser();
+  userStore = useUserStore();
+
+  addUser(newUser) {
+    this.userStore.addUser(newUser);
   }
 }
 </script>
@@ -39,9 +41,7 @@ export default class App extends Vue {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
   margin-top: 60px;
   margin-left: 60px;
 }
-
 </style>

@@ -36,7 +36,8 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
-import { NSelect, NInput } from 'naive-ui';
+import NSelect from 'naive-ui';
+import NInput from 'naive-ui';
 
 export default defineComponent({
   components: {

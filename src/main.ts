@@ -1,17 +1,9 @@
-// import { createApp } from 'vue'
-// import App from './App.vue'
-
-// createApp(App).mount('#app')
-
-
-
-// src/main.ts
 import { createApp } from 'vue';
+import { createPinia } from 'pinia';
 import App from './App.vue';
-import pinia from '../store'; // Импортируем Pinia
 
 const app = createApp(App);
+const pinia = createPinia();
 
-app.use(pinia); // Подключаем Pinia
-
+app.use(pinia);
 app.mount('#app');
