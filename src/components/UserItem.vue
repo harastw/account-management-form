@@ -5,7 +5,8 @@
       <input 
         v-model="localUser.tag" 
         @input="updateUser('tag', localUser.tag)" 
-        placeholder="Tag" />
+        placeholder="Tag" 
+        maxlength="20" />
     </div>
 
     <div class="form-group">
@@ -20,7 +21,11 @@
 
     <div class="form-group">
       <label>Логин</label>
-      <input v-model="localUser.login" @input="updateUser('login', localUser.login)" placeholder="Login" />
+      <input 
+        v-model="localUser.login" 
+        @input="updateUser('login', localUser.login)" 
+        placeholder="Login" 
+        maxlength="20" />
     </div>
 
     <div class="form-group" v-if="localUser.type === 'Локальная'">
@@ -30,10 +35,9 @@
         v-model:value="localUser.password"
         @update:value="updateUser('password', $event)"
         placeholder="Введите пароль"
-      />
+        maxlength="20" />
     </div>
 
-    <!-- Replace the Add button with the Remove button -->
     <button class="remove-button" @click="removeUser">Remove</button>
   </li>
 </template>
@@ -113,35 +117,37 @@ export default defineComponent({
 <style lang="scss" scoped>
 .user-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* Изменено для лучшего отображения элементов */
   margin-bottom: 8px;
 
   .form-group {
     display: flex;
     flex-direction: column;
     margin-right: 16px;
-
+    width: 200px; /* Установите ширину для всех form-group */
+    
     label {
       margin-bottom: 4px;
     }
 
     input,
     n-select {
+      width: 100%; /* Задаем ширину равной родительскому элементу */
       margin-bottom: 8px;
     }
   }
 
   .remove-button {
     margin-left: 8px;
-    background-color: #ff4d4f; /* Optional: Red background color */
-    color: white; /* Text color */
-    border: none; /* No border */
-    padding: 8px 16px; /* Padding for the button */
-    cursor: pointer; /* Pointer cursor on hover */
-    border-radius: 4px; /* Rounded corners */
+    background-color: #ff4d4f; /* Красный цвет фона */
+    color: white; /* Цвет текста */
+    border: none; /* Без границы */
+    padding: 8px 16px; /* Отступы для кнопки */
+    cursor: pointer; /* Курсор-указатель при наведении */
+    border-radius: 4px; /* Скругленные углы */
 
     &:hover {
-      background-color: #d33; /* Darker red on hover */
+      background-color: #d33; /* Темнее красный при наведении */
     }
   }
 }
