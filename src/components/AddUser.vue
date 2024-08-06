@@ -1,11 +1,11 @@
 <template>
-  <div style="display: flex; align-items: center; margin-bottom: 16px;">
-    <div style="display: flex; flex-direction: column; margin-right: 8px;">
+  <div id="tagCenter">
+    <div id="tagColumn">
       <label for="tag">Метки</label>
       <input v-model="newUser.tag" placeholder="Tag" />
     </div>
 
-    <div style="display: flex; flex-direction: column; margin-right: 8px;">
+    <div id="typeDiv">
       <label for="type">Тип записи</label>
       <n-select
         v-model:value="newUser.type"
@@ -15,12 +15,12 @@
       />
     </div>
 
-    <div style="display: flex; flex-direction: column; margin-right: 8px;">
+    <div class="miniPadding">
       <label for="login">Логин</label>
       <input v-model="newUser.login" placeholder="Login" />
     </div>
 
-    <div style="display: flex; flex-direction: column; margin-right: 8px;" v-if="newUser.type === 'Локальная'">
+    <div class="miniPadding" v-if="newUser.type === 'Локальная'">
       <label for="password">Пароль</label>
       <n-input
         type="password"
@@ -75,6 +75,30 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-/* Ваши стили для AddUser */
+<style lang="scss" scoped>
+
+#typeDiv {
+  display: flex;
+  flex-direction: column; 
+  margin-right: 8px;
+}
+
+#tagCenter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+#tagColumn {
+  display: flex;
+  flex-direction: column;
+  margin-right: 8px;
+}
+
+.miniPadding {
+  display: flex;
+  flex-direction: column;
+  margin-right: 8px;
+}
+
 </style>
