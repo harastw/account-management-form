@@ -6,6 +6,7 @@ import UserClass from '../UserClass'
 const props = defineProps<{
   user: UserClass
   onRemove: () => void
+  addCorrectUser: (user: UserClass) => void
 }>()
 
 const options = [
@@ -14,8 +15,12 @@ const options = [
 ]
 const form = ref(props.user)
 const isError = ref(false)
+
 const validateInput = () => {
   isError.value = form.value.password.length < 8
+  if (!isError.value) {
+    props.addCorrectUser(form.value) // Добавляем пользователя при успешной валидации
+  }
 }
 </script>
 
