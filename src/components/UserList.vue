@@ -8,63 +8,26 @@
       <label>Пароль</label>
     </div>
     <ul>
-      <UserItem
-        v-for="(user, index) in users"
-        :key="index"
-        :user="user"
-        :userTypes="userTypes"
-        :onUpdate="(field, value) => updateUser(index, field, value)"
-        :onRemove="() => removeUser(index)"
-      />
+      <li v-for="(user, index) in users" :key="index">
+        <UserItem :user="user" :on-remove="() => removeUser(index)" />
+      </li>
     </ul>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { useUserStore } from '../store';
-// import AddUser from './AddUser.vue';
-import UserItem from './UserItem.vue';
+<script setup lang="ts">
+import UserItem from './UserItem.vue'
+import { defineProps } from 'vue'
+import UserClass from '../UserClass'
 
-export default defineComponent({
-  components: {
-    // AddUser,
-    UserItem,
-  },
-  name: 'UserList',
-  setup() {
-    const userStore = useUserStore();
-
-    const userTypes = [
-      { label: 'LDAP', value: 'LDAP' },
-      { label: 'Локальная', value: 'Локальная' },
-    ];
-
-    const addUser = (newUser) => {
-      userStore.addUser(newUser);
-    };
-
-    const updateUser = (index, field, value) => {
-      userStore.updateUser(index, field, value);
-    };
-
-    const removeUser = (index) => {
-      userStore.removeUser(index);
-    };
-
-    return {
-      users: userStore.users,
-      addUser,
-      updateUser,
-      userTypes,
-      removeUser,
-    };
-  },
-});
+const props = defineProps<{
+  users: UserClass[]
+  removeUser: (index: number) => void
+  newUser: { tag: string; type: string; login: string; password: string }
+}>()
 </script>
 
-
-<style lang="scss" scoped>
+<style scoped>
 .form-group {
   display: flex;
   justify-content: space-between; /* Разделение заголовков по ширине */
