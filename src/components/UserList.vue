@@ -6,6 +6,7 @@ import UserClass from '../UserClass'
 const props = defineProps<{
   users: UserClass[]
   removeUser: (index: number) => void
+  addCorrectUser: (user: UserClass) => void
 }>()
 </script>
 
@@ -20,7 +21,11 @@ const props = defineProps<{
     </div>
     <ul>
       <li v-for="(user, index) in users" :key="index">
-        <UserItem :user="user" :on-remove="() => removeUser(index)" />
+        <UserItem
+          :user="user"
+          :on-remove="() => removeUser(index)"
+          :add-correct-user="addCorrectUser"
+        />
       </li>
     </ul>
   </div>
