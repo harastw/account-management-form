@@ -5,10 +5,13 @@ import RegistrationHeader from './components/RegistrationHeader.vue'
 import UserList from './components/UserList.vue'
 import UserClass from './UserClass' // Импортируйте ваш класс UserClass
 
-const users = ref<UserClass[]>([new UserClass(), new UserClass(), new UserClass()])
+const user1 = new UserClass('worker-manager', 'Локальная', 'bigbossggwp1995', 'qwerty1234')
+const user2 = new UserClass('worker-intern', 'LDAP', 'ugabuga227', '123')
+const user3 = new UserClass('sweet', 'Локальная', 'nyashka_kitty1990', 'qwerty1234')
+const users = ref<UserClass[]>([user1, user2, user3])
 
 const addNewUser = () => {
-  const user = new UserClass()
+  const user = new UserClass('worker', 'LDAP', '', '')
   users.value.push(user)
 }
 const removeUser = (index: number) => {
