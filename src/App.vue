@@ -6,27 +6,10 @@ import UserList from './components/UserList.vue'
 import UserClass from './UserClass' // Импортируйте ваш класс UserClass
 
 const users = ref<UserClass[]>([new UserClass(), new UserClass(), new UserClass()])
-const newUser = ref({
-  tag: '',
-  type: '',
-  login: '',
-  password: ''
-})
 
 const addNewUser = () => {
   const user = new UserClass()
-  user.tag = newUser.value.tag
-  user.type = newUser.value.type
-  user.login = newUser.value.login
-  user.password = newUser.value.password
-
   users.value.push(user)
-
-  // Сброс значений
-  newUser.value.tag = ''
-  newUser.value.type = ''
-  newUser.value.login = ''
-  newUser.value.password = ''
 }
 const removeUser = (index: number) => {
   users.value.splice(index, 1)
@@ -39,7 +22,7 @@ const removeUser = (index: number) => {
 
     <main>
       <RegistrationAttention />
-      <UserList :users="users" :removeUser="removeUser" :newUser="newUser" />
+      <UserList :users="users" :removeUser="removeUser" />
     </main>
   </div>
 </template>
