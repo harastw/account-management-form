@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { NInput, NSelect, NButton, NForm } from 'naive-ui'
-import { ref, defineProps, watch } from 'vue'
+import { ref, defineProps } from 'vue'
 import UserClass from '../UserClass'
 
 const props = defineProps<{
