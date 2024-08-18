@@ -1,3 +1,14 @@
+<script setup lang="ts">
+import UserItem from './UserItem.vue'
+import { defineProps } from 'vue'
+import UserClass from '../UserClass'
+
+const props = defineProps<{
+  users: UserClass[]
+  removeUser: (index: number) => void
+}>()
+</script>
+
 <template>
   <div>
     <h1>User List</h1>
@@ -14,18 +25,6 @@
     </ul>
   </div>
 </template>
-
-<script setup lang="ts">
-import UserItem from './UserItem.vue'
-import { defineProps } from 'vue'
-import UserClass from '../UserClass'
-
-const props = defineProps<{
-  users: UserClass[]
-  removeUser: (index: number) => void
-  newUser: { tag: string; type: string; login: string; password: string }
-}>()
-</script>
 
 <style scoped>
 .form-group {
