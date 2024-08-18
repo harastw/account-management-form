@@ -26,34 +26,34 @@ const validateInput = () => {
 
 <template>
   <li class="user-item">
-    <div class="form-group">
+    <n-form class="form-group">
       <n-input
         placeholder="Tag"
         maxlength="20"
-        v-model="form.tag"
+        v-model:value="form.tag"
         :default-value="props.user.tag"
       />
-    </div>
+    </n-form>
 
-    <div class="form-group">
+    <n-form class="form-group">
       <n-select
         placeholder="Выберите тип"
-        v-model="form.type"
+        v-model:value="form.type"
         :options="options"
         :default-value="props.user.type"
       />
-    </div>
+    </n-form>
 
-    <div class="form-group">
+    <n-form class="form-group">
       <n-input
         placeholder="Login"
         maxlength="20"
-        v-model="form.login"
+        v-model:value="form.login"
         :default-value="props.user.login"
       />
-    </div>
+    </n-form>
 
-    <n-form :model="form" class="form-group">
+    <n-form v-if="user.type === 'Локальная'" :model="form" class="form-group">
       <n-input
         type="password"
         placeholder="Введите пароль"
